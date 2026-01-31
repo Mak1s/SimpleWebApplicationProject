@@ -56,3 +56,30 @@ This project was built to showcase backend–frontend interaction, database hand
 | homeaddress | VARCHAR |
 | workaddress | VARCHAR |
 
+---
+
+## How to run the project
+
+  1. Clone the repository "git clone https://github.com/Mak1s/SimpleWebApplicationProject.git"
+  2. Install MySQL Server (or use XAMPP/WAMP)
+      Make sure MySQL is running and note your username(root), password, and port(default 3306)
+  3. Open the Project in NetBeans
+  4. Configure Database Credentials on DB_Connection.java
+      ```java
+      private static final String USERNAME = "root";
+      private static final String PASSWORD = "your_password";
+      private static final String URL = "jdbc:mysql://localhost:3306/";
+      ```
+  5. Run init_Database.java that creates the required database
+  6. Configure Apache Tomcat
+      1. Install Apache Tomcat 9
+      2. In Netbeans go to Services → Servers to install Tomcat
+      3. Set the Tomcat installation folder
+      4. Provide username/password if requested
+             
+  7. Build and Deploy the Project
+  8. Start Tomcat Server
+  9. Run index.html
+  10. View the database from http://localhost/phpmyadmin or MySQL workbench 
+ 
+
