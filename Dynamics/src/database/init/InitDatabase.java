@@ -29,11 +29,14 @@ public class InitDatabase {
         conn.close();
     }
 
-    public void initTables() throws SQLException, ClassNotFoundException {
+        public void initTables() throws SQLException, ClassNotFoundException {
         EditNewUserTable newusertable = new EditNewUserTable();
+        EditAddressTable eat = new EditAddressTable();
         newusertable.createNewUserTable();
+        eat.createAddressTable();
 
     }
+
 
     public void addToDatabaseExamples() throws ClassNotFoundException, SQLException {
         //Users

@@ -71,27 +71,45 @@ public class EditNewUserTable {
 
             Statement stmt = con.createStatement();
 
-            String insertQuery = "INSERT INTO "
-                    + " new_users (name,surname,birthdate,gender,homeaddress,workaddress)"
-                    + " VALUES ("
-                    + "'" + user.getName() + "',"
-                    + "'" + user.getSurname() + "',"
-                    + "'" + user.getBirthdate() + "',"
-                    + "'" + user.getGender() + "',"
-                    + "'" + user.getHomeAddress() + "',"
-                    + "'" + user.getWorkAddress() + "'"
-                    + ")";
-            //stmt.execute(table);
-            System.out.println(insertQuery);
-            stmt.executeUpdate(insertQuery);
-            System.out.println("# The user was successfully added in the database.");
+            String insertQuery = "INSERT INTO new_users (name,surname,birthdate,gender,homeaddress,workaddress) VALUES ('"
+                    + user.getName() + "','"
+                    + user.getSurname() + "','"
+                    + user.getBirthdate() + "','"
+                    + user.getGender() + "','"
+                    + user.getHomeAddress() + "','"
+                    + user.getWorkAddress() + "')";
 
-            /* Get the member id from the database and set it to the member */
+            stmt.executeUpdate(insertQuery, Statement.RETURN_GENERATED_KEYS);
+
+            ResultSet rs = stmt.getGeneratedKeys();
+            int userId = 0;
+            if (rs.next()) {
+                userId = rs.getInt(1);
+            }
+
+            EditAddressTable eat = new EditAddressTable();
+
+            Address home = new Address();
+            home.setUser_Id(userId);
+            home.setType("home");
+            home.setAddress(user.getHomeAddress());
+            eat.addAddress(home);
+
+            Address work = new Address();
+            work.setUser_Id(userId);
+            work.setType("work");
+            work.setAddress(user.getWorkAddress());
+            eat.addAddress(work);
+
+            System.out.println("# The user and addresses were successfully added.");
             stmt.close();
+            rs.close();
+
 
         } catch (SQLException ex) {
             Logger.getLogger(EditNewUserTable.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
     public ArrayList<NewUser> getAllUsers() throws ClassNotFoundException {
