@@ -56,6 +56,15 @@ This project was built to showcase backend–frontend interaction, database hand
 | homeaddress | VARCHAR |
 | workaddress | VARCHAR |
 
+**Table: `addresses`**
+
+| Column      | Type |
+|------------|------|
+| address_id     | INT (Primary Key, Auto Increment) |
+| user_id        | INT (Foreign Key REFERRING TO new_users |
+| type           | VARCHAR |
+| address        | VARCHAR |
+
 ---
 
 ## How to run the project
